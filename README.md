@@ -8,3 +8,4 @@ Here you find the solutions of [Advent of Code](https://adventofcode.com/) 2022 
 - [✅ Day 2](day%202/)
 - [✅ Day 3](day%203/)
 - [✅ Day 4](day%204/)
+- [✅ Day 5](day%205/)
