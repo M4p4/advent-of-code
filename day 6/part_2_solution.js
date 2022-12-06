@@ -1,16 +1,15 @@
 const path = require('path');
 const fs = require('fs');
 
-const inputs = fs
-  .readFileSync(path.join(__dirname, 'input.txt'), 'utf8')
-  .split('\n');
+const inputs = fs.readFileSync(path.join(__dirname, 'input.txt'), 'utf8');
 
+const PACKET_LEN = 14;
 let pos = 0;
 let stream = '';
 
-for (c of [...inputs[0]]) {
-  if (pos >= 13) {
-    if (new Set(stream.slice(stream.length - 14)).size === 14) {
+for (c of [...inputs]) {
+  if (pos >= PACKET_LEN - 1) {
+    if (new Set(stream.slice(stream.length - PACKET_LEN)).size === PACKET_LEN) {
       break;
     }
   }
