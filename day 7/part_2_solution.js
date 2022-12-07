@@ -11,39 +11,22 @@ let system = {};
 
 for (let input of inputs) {
   if (input.includes('$')) {
-    //list
-    if (input.includes('$ ls')) {
-    }
-    // cd
     if (input.includes('$ cd ')) {
       const newPath = input.replace('$ cd ', '').trim();
       if (newPath === '/') currentPath = newPath;
       else currentPath = path.join(currentPath, newPath);
-      if (system[currentPath] === undefined) {
-        system[currentPath] = [];
-      }
+      if (system[currentPath] === undefined) system[currentPath] = [];
     }
   } else {
-    //dir
-    if (input.includes('dir ')) {
-      const dir = input.replace('dir ', '').trim();
-
-      //console.log('dir', dir);
-    }
-    //file
-    else {
-      const fileName = input.split(' ')[1];
+    if (!input.includes('dir ')) {
       const fileSize = Number.parseInt(input.split(' ')[0]);
-      if (!system[currentPath].includes(fileSize)) {
+      if (!system[currentPath].includes(fileSize))
         system[currentPath].push(fileSize);
-      }
-      //console.log('file', fileName, fileSize);
     }
   }
 }
 
 let dirsTotalSizes = [];
-let result = 0;
 
 for (const [key, value] of Object.entries(system)) {
   let dirSize = system[key].reduce((sum, v) => sum + v, 0);
@@ -57,12 +40,11 @@ for (const [key, value] of Object.entries(system)) {
 }
 
 const spaceNeeded = 30000000 - (70000000 - dirsTotalSizes[0].dirSize);
-let res = dirsTotalSizes[0].dirSize;
+let result = dirsTotalSizes[0].dirSize;
 
 for (const [key, value] of Object.entries(dirsTotalSizes)) {
-  if (value.dirSize >= spaceNeeded && value.dirSize < res) {
-    res = value.dirSize;
+  if (value.dirSize >= spaceNeeded && value.dirSize < result) {
+    result = value.dirSize;
   }
 }
-
-console.log(res);
+console.log(result);
