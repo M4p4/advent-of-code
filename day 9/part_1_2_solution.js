@@ -14,8 +14,8 @@ const directions = {
 };
 
 const simulate = (knots) => {
-  let rope = Array.from({ length: knots }, () => [0, 0]),
-    visited = {};
+  let rope = Array.from({ length: knots }).fill([0, 0]);
+  visited = {};
   inputs.map((line) => {
     [direction, moves] = line.split(' ');
     for (let i = 0; i < Number(moves); i++) {
