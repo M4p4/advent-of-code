@@ -8,42 +8,29 @@ const inputs = fs
 
 let register = 1;
 let cycle = 0;
-const checks = { 20: 0, 60: 0, 100: 0, 140: 0, 180: 0, 220: 0 };
-let display = '';
+let display = [];
 
-const check = () => {
-  if (Object.keys(checks).includes(cycle.toString())) {
-    checks[cycle] = cycle * register;
-    console.log(cycle, checks[cycle]);
+const draw = () => {
+  if (cycle % 40 >= register && cycle % 40 <= register + 2) {
+    display.push('#');
+  } else {
+    display.push('.');
   }
 
-  if (cycle % 40 >= register && cycle % 40 <= register + 2) {
-    display += '#';
-  } else {
-    display += '.';
+  if (cycle % 40 === 0) {
+    display.push('\n');
   }
 };
 
 for (let line of inputs) {
-  if (line === 'noop') {
-    cycle++;
-    check();
-  } else {
+  cycle++;
+  draw();
+  if (line !== 'noop') {
     const toWrite = Number.parseInt(line.split(' ')[1]);
     cycle++;
-    check();
-    cycle++;
-    check();
+    draw();
     register += toWrite;
   }
 }
 
-let result = '';
-for (let i = 1; i < [...display].length + 1; i++) {
-  result += [...display][i - 1];
-
-  if (i % 40 === 0) {
-    result += '\n';
-  }
-}
-console.log(result);
+console.log(display.join(''));
