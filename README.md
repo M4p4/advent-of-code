@@ -22,3 +22,5 @@ Here you find the solutions of [Advent of Code](https://adventofcode.com/) 2022 
 - [✅ Day 16](day%2016/)
 - [✅ Day 17](day%2017/)
 - [✅ Day 18](day%2018/)
+- [✅ Day 19](day%2019/)
+- [✅ Day 20](day%2020/)
